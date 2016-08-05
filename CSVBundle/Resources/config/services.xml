@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <services>
+        <service class="Administration\CSVBundle\Manager\ExportManager" id="administration_csv.manager.export_manager">
+            <argument id="fos_user.entity_manager" type="service"/>
+        </service>
+        <service class="Administration\CSVBundle\Csv\Import\ConvertCsvToArray"
+                 id="adminisitration_csv.csv_import.convert_csv_to_array"/>
+
+    </services>
+
+</container>
