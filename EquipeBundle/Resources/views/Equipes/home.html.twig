@@ -1,0 +1,22 @@
+{% set equipes = equipes %}
+{% for equipe in equipes %}
+    <div class="card people">
+        <div class="card-top green">
+            <a>
+                <img src="{{ asset( equipe.galleries.getWebPath()) }}"
+                     alt="{{ equipe.nom }}-{{ equipe.prenom }}"/>
+            </a>
+        </div>
+        <div class="card-info">
+            <a class="title">{{ equipe.nom }} {{ equipe.prenom }}</a>
+            <a class="title">{{ equipe.poste }}</a>
+            <div class="desc">{{ equipe.apropos|raw }}</div>
+        </div>
+        <div class="card-bottom">
+            {% for social in equipe.socials %}
+                <a class="btn btn-linkedin btn-block" href="{{ social.url }}">{{ social.type }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endfor %}

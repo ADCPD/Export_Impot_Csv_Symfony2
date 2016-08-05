@@ -1,0 +1,211 @@
+{% extends '::base_dash.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/blogstyle/css/Ckeditor/Redactor.css') }}">
+{% endblock %}
+  {% block breadcrumb %}
+      {{ parent() }}
+      <li><a href="{{ path('articles') }}">Gestion d'equipes</a> <span class="divider">/</span></li>
+      <li class="active">Ajouter un collaborateur</li>
+  {% endblock %}
+{% block Dashnoard -%}
+    <div class="container marketing">
+        <div class="row">
+            <div class="span8 well">
+                <div class="page-header">
+                    <h3>Nouveau
+                        <small> Collaborateur</small>
+                    </h3>
+                </div>
+                <div class="span6">
+                    {#{{ form(form) }}#}
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                    {{ form_errors(form) }}
+                    <div class="control-group">
+                        <div class=" input-prepend">
+                            <label for=""><strong>Nom</strong></label>
+                            {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class=" input-prepend">
+                            <label for=""><strong>Prénom</strong></label>
+                            {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class=" input-prepend">
+                            <label for=""><strong>Specialité</strong> </label>
+                            <span class="add-on">
+                                <i class="fa fa-bookmark-o"></i>
+                            </span>
+                            {{ form_widget(form.poste, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class=" input-prepend">
+                            <label for=""><strong>à propos</strong> </label>
+                            {{ form_widget(form.apropos, {'attr': {'class': 'form-control textarea'}}) }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="control-group">
+                        <div class=" input-prepend">
+                            <label for=""><strong>Photo de profil</strong> </label>
+                            {{ form_widget(form.galleries, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="control-group">
+                        <div class=" input-prepend">
+                            <label for=""><strong>Réseaux sociaux</strong> </label>
+                            {{ form_widget(form.socials, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="control-group">
+                        <div class=" input-prepend">
+                            <label for=""><strong>Coordonnées </strong> </label>
+                            {#<span class="add-on">#}
+                            {#<i class="fa fa-map-marker" aria-hidden="true"></i>#}
+                            {#</span>#}
+                            {{ form_widget(form.adresses) }}
+                        </div>
+                    </div>
+                    {{ form_rest(form) }}
+                    {{ form_end(form) }}
+
+
+                </div>
+                <div class="span4">
+                    <div class="row-fluid">
+                        <div class="alert alert-block">
+                            {#<button type="button" class="close" data-dismiss="alert">&times;</button>#}
+                            <h4>Information!</h4>
+                            Seulement un contenu de ce type qui sera afficher au public...
+                        </div>
+                    </div>
+                    <div class="card people">
+                        <div class="card-top green">
+                            <a href="#">
+                                <img src="{{ asset('http://www.marcellop.com/bootplus/assets/img/silhouette_bart.png') }}"
+                                     alt=""/>
+                            </a>
+                        </div>
+                        <div class="card-info">
+                            <a class="title" href="#">John Doe</a>
+                            <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                        </div>
+                        <div class="card-bottom">
+                            <button class="btn btn-block">LinkedIn</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span4 well">
+                <div class="page-header">
+                    <h3>Action </h3>
+                </div>
+                <a href="{{ path('equipes') }}" class="btn btn-primary btn-block">
+                    Retour à la liste
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/blogstyle/js/jQuery_v3.0.0.js') }}"></script>
+    <!-- Plugin -->
+    <script src="{{ asset('bundles/blogstyle/js/Ckeditor/source.js') }}"></script>
+    <script src="{{ asset('bundles/blogstyle/js/Ckeditor/combine.js') }}"></script>
+    <script src="{{ asset('bundles/blogstyle/js/Ckeditor/redactor.js') }}"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('.textarea').redactor({
+                // Integration du plugin
+                plugins: ['source'],
+                // Ajouter l'attribut PLACEHOLDER=""
+                placeholder: 'Enter vos notes ici ...',
+
+//                buttons:['format', 'bold', 'italic', 'deleted', 'lists','image', 'file', 'link', 'horizontalrule']
+                buttons: ['format', 'bold', 'italic', 'deleted', 'lists', 'horizontalrule'],
+
+
+                formatting: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5'],
+
+
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+            var $container = $('div#CMS\EquipeBundle_equipes_socials');
+
+            // On ajoute un lien pour ajouter une nouvelle catégorie
+            var $addLink = $('<a href="#" id="add_Category" class="btn btn-default">Ajouter un réseau</a>');
+            $container.append($addLink);
+
+            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+            $addLink.click(function (e) {
+                addCategory($container);
+                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                return false;
+            });
+
+            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+            var index = $container.find(':input').length;
+
+            // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+            if (index == 0) {
+                addCategory($container);
+            } else {
+                // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+                $container.children('div').each(function () {
+                    addDeleteLink($(this));
+                });
+            }
+
+            // La fonction qui ajoute un formulaire Categorie
+            function addCategory($container) {
+                // Dans le contenu de l'attribut « data-prototype », on remplace :
+                // - le texte "__name__label__" qu'il contient par le label du champ
+                // - le texte "__name__" qu'il contient par le numéro du champ
+                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Réseau n°' + (index + 1))
+                        .replace(/__name__/g, index));
+
+                // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+                addDeleteLink($prototype);
+
+                // On ajoute le prototype modifié à la fin de la balise <div>
+                $container.append($prototype);
+
+                // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                index++;
+            }
+
+            // La fonction qui ajoute un lien de suppression d'une catégorie
+            function addDeleteLink($prototype) {
+                // Création du lien
+                $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+                // Ajout du lien
+                $prototype.append($deleteLink);
+
+                // Ajout du listener sur le clic du lien
+                $deleteLink.click(function (e) {
+                    $prototype.remove();
+                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                    return false;
+                });
+            }
+        });
+    </script>
+{% endblock %}

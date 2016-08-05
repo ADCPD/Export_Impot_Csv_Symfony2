@@ -1,0 +1,30 @@
+equipe_gallery:
+    path:     /
+    defaults: { _controller: "EquipeBundle:GalleryEquipes:index" }
+
+equipe_gallery_show:
+    path:     /{id}/show
+    defaults: { _controller: "EquipeBundle:GalleryEquipes:show" }
+
+equipe_gallery_new:
+    path:     /new
+    defaults: { _controller: "EquipeBundle:GalleryEquipes:new" }
+
+equipe_gallery_create:
+    path:     /create
+    defaults: { _controller: "EquipeBundle:GalleryEquipes:create" }
+    methods:  POST
+
+equipe_gallery_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "EquipeBundle:GalleryEquipes:edit" }
+
+equipe_gallery_update:
+    path:     /{id}/update
+    defaults: { _controller: "EquipeBundle:GalleryEquipes:update" }
+    methods:  [POST, PUT]
+
+equipe_gallery_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "EquipeBundle:GalleryEquipes:delete" }
+    methods:  [POST, DELETE]

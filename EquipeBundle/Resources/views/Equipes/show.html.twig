@@ -1,0 +1,94 @@
+{% extends '::base_dash.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/blogstyle/css/Ckeditor/Redactor.css') }}">
+{% endblock %}
+  {% block breadcrumb %}
+      {{ parent() }}
+      <li><a href="{{ path('articles') }}">Gestion d'equipes</a> <span class="divider">/</span></li>
+      <li class="active">Ajouter un collaborateur</li>
+  {% endblock %}
+{% block Dashnoard -%}
+<div class="container marketing">
+    <div class="row">
+        <div class="span8 well">
+            <div class="page-header">
+                <h3>Fiche Collaborateur
+                    <small>{{ entity.nom }} {{ entity.prenom }}</small>
+                </h3>
+            </div>
+            <table class="hidden-tablet table">
+                <tbody>
+                <tr>
+                    <th>Photo de profil</th>
+                    <td><img src="{{ asset(entity.galleries.getWebPath()) }}" class="img-polaroid" width="150px"></td>
+                </tr>
+
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ entity.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Prenom</th>
+                    <td>{{ entity.prenom }}</td>
+                </tr>
+                <tr>
+                    <th>Specialité</th>
+                    <td>{{ entity.poste }}</td>
+                </tr>
+                <tr>
+                    <th>à propos</th>
+                    <td>{{ entity.apropos|raw }}</td>
+                </tr>
+                <tr>
+                    <th>Réseaux sociaux</th>
+                    <td>
+                        {% if entity.socials is empty %}
+                            <span class="label">non disponible</span>
+                        {% else %}
+                            {% for social in entity.socials %}
+                                <a href="{{ social.url }}">{{ social.type }}</a>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Coordonnées</th>
+                    <td>
+                        <table>
+                            <tr>
+                                <th>Adresse</th>
+                                <td>{{ entity.adresses.adresse }}</td>
+                            </tr>
+                            <tr>
+                                <th>E-mail</th>
+                                <td>{{ entity.adresses.mail }}</td>
+                            </tr>
+                            <tr>
+                                <th>Numero Mobile :</th>
+                                <td>{{ entity.adresses.tel }}</td>
+                            </tr>
+                            <tr>
+                                <th>Numero Fix :</th>
+                                <td>{{ entity.adresses.fix }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="span4 well">
+            <a href="{{ path('equipes') }}" class="btn btn-primary btn-block">
+                Retour à la liste
+            </a>
+            <a href="{{ path('equipes_edit', { 'id': entity.id }) }}" class="btn btn-default btn-block">
+                Modifier
+            </a>
+            {{ form(delete_form) }}
+        </div>
+    </div>
+    {% endblock %}
+    {% block javascripts %}
+    {{ parent() }}
+{% endblock %}

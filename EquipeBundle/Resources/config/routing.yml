@@ -1,0 +1,23 @@
+equipe_equipe_gallery:
+    resource: "@EquipeBundle/Resources/config/routing/galleryequipes.yml"
+    prefix:   /equipe/gallery
+
+equipe_equipe_adresse:
+    resource: "@EquipeBundle/Resources/config/routing/adresse.yml"
+    prefix:   /equipe/adresse
+
+equipe_social_social:
+    resource: "@EquipeBundle/Resources/config/routing/social.yml"
+    prefix:   /social/reseaux-sociaux
+
+equipe_equipes:
+    resource: "@EquipeBundle/Resources/config/routing/equipes.yml"
+    prefix:   /equipe
+
+equipe_homepage:
+    path:     /equipes
+    defaults: { _controller: EquipeBundle:Equipes:home }
+
+equipe_csv_upload:
+    path:    /equipe/equipes_csv
+    defaults: { _controller: EquipeBundle:Equipes:generateCsv }

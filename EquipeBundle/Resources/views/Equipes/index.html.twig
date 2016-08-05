@@ -1,0 +1,87 @@
+{% extends '::base_dash.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+  {% block breadcrumb %}
+      {{ parent() }}
+      <li><a href="{{ path('articles') }}">Gestion d'quipes</a> <span class="divider">/</span></li>
+      <li class="active">Liste</li>
+  {% endblock %}
+{% block Dashnoard -%}
+    <div class="container marketing">
+        <div class="row inline well">
+            <a href="{{ path('equipes_new') }}" class="btn btn-primary btn-block">
+                Ajouter une nouvelle fiche collaborateur
+            </a>
+        </div>
+        <div class="row">
+            <div class="page-header">
+                <h2>Collaborateurs
+                    <small>liste</small>
+                </h2>
+                <a href="{{ path('equipe_csv_upload') }}" class="btn btn-success" style="float: right;">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                    Liste des collaborateurs en *.CSV
+                </a>
+            </div>
+
+            <div class="row-fluid">
+                {% if equipes is empty %}
+                    <div class="alert alert-info">
+                        <strong>Information ! </strong>Aucune collaborateur n'est renseigné dans la base.
+                    </div>
+                {% else %}
+                    {% for entity in equipes %}
+                        <div class="card people">
+                            <div class="card-top green">
+                                <a href="#">
+                                    <img src="{{ asset(entity.galleries.getWebPath()) }}"
+                                         alt="photo-profil-{{ entity.nom }}_{{ entity.prenom }}"/>
+                                </a>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="btn-group">
+                                    <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">Action
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('equipes_show', { 'id': entity.id }) }}">Visualiser</a>
+                                        </li>
+                                        <li><a href="{{ path('equipes_edit', { 'id': entity.id }) }}">Modifier</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-info">
+                                <a class="title" href="#">{{ entity.nom }} {{ entity.prenom }}</a>
+                                <div class="desc">
+                                    {{ entity.apropos|raw }}
+                                </div>
+                            </div>
+                            <div class="card-bottom">
+                                <div class="row-fluid">
+                                    {% for social in entity.socials %}
+                                        <a href="{{ social.url }}">
+                                            <button class="btn btn-block">{{ social.type }}</button>
+                                        </a>
+                                    {% endfor %}</div>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset('bundles/blogstyle/js/bootstrap-button.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/blogstyle/js/bootstrap-dropdown.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/blogstyle/js/jQuery_v3.0.0.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.dropdown-toggle').dropdown()
+            });
+        </script>
+    {% endblock %}

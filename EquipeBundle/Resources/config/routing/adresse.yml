@@ -1,0 +1,30 @@
+equipe_adresse:
+    path:     /
+    defaults: { _controller: "EquipeBundle:Adresse:index" }
+
+equipe_adresse_show:
+    path:     /{id}/show
+    defaults: { _controller: "EquipeBundle:Adresse:show" }
+
+equipe_adresse_new:
+    path:     /new
+    defaults: { _controller: "EquipeBundle:Adresse:new" }
+
+equipe_adresse_create:
+    path:     /create
+    defaults: { _controller: "EquipeBundle:Adresse:create" }
+    methods:  POST
+
+equipe_adresse_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "EquipeBundle:Adresse:edit" }
+
+equipe_adresse_update:
+    path:     /{id}/update
+    defaults: { _controller: "EquipeBundle:Adresse:update" }
+    methods:  [POST, PUT]
+
+equipe_adresse_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "EquipeBundle:Adresse:delete" }
+    methods:  [POST, DELETE]

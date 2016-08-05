@@ -1,0 +1,6 @@
+{% autoescape false %}
+    {#{{ dump(data) }}#}
+    {% for collab in data %}
+        {{ collab.nom }};{{ collab.prenom }};{{ collab.poste }};{{ collab.adresses.adresse }};{{ collab.adresses.mail }};{{ collab.adresses.tel }};{{ collab.adresses.fix }};
+    {% endfor %}
+{% endautoescape %}

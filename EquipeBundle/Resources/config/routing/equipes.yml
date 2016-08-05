@@ -1,0 +1,30 @@
+equipes:
+    path:     /
+    defaults: { _controller: "EquipeBundle:Equipes:index" }
+
+equipes_show:
+    path:     /{id}/show
+    defaults: { _controller: "EquipeBundle:Equipes:show" }
+
+equipes_new:
+    path:     /new
+    defaults: { _controller: "EquipeBundle:Equipes:new" }
+
+equipes_create:
+    path:     /create
+    defaults: { _controller: "EquipeBundle:Equipes:create" }
+    methods:  POST
+
+equipes_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "EquipeBundle:Equipes:edit" }
+
+equipes_update:
+    path:     /{id}/update
+    defaults: { _controller: "EquipeBundle:Equipes:update" }
+    methods:  [POST, PUT]
+
+equipes_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "EquipeBundle:Equipes:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,90 @@
+{% extends '::base_dash.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/blogstyle/css/Ckeditor/Redactor.css') }}">
+{% endblock %}
+  {% block breadcrumb %}
+      {{ parent() }}
+      <li><a href="{{ path('articles') }}">Gestion d'equipe</a> <span class="divider">/</span></li>
+      <li class="active">Ajout d'adresse</li>
+  {% endblock %}
+{% block Dashnoard -%}
+    <div class="container marketing">
+        <div class="row">
+            <div class="span8 well">
+                <div class="page-header">
+                    <h3>Nouvelle
+                        <small> Adresse</small>
+                    </h3>
+                </div>
+                {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                {{ form_errors(form) }}
+                <div class="control-group">
+                    <div class=" input-prepend">
+                        <label for=""><strong>Adresse</strong></label>
+                        <span class="add-on">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            </span>
+                        {{ form_widget(form.adresse, {'attr': {'class': 'form-control' }}) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class=" input-prepend">
+                        <label for=""><strong>E-mail</strong></label>
+                        <span class="add-on">
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                             </span>
+                        {{ form_widget(form.mail, {'attr': {'class': 'form-control' }}) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class=" input-prepend">
+                        <label for=""><strong>Téléphone(mobile) </strong></label>
+                        <span class="add-on">
+                             <i class="fa fa-mobile" aria-hidden="true"></i>
+                            </span>
+                        {{ form_widget(form.tel, {'attr': {'class': 'form-control' }}) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class=" input-prepend">
+                        <label for=""><strong>Téléphone(Fix) </strong></label>
+                        <span class="add-on">
+                             <i class="fa fa-phone" aria-hidden="true"></i>
+                            </span>
+                        {{ form_widget(form.fix, {'attr': {'class': 'form-control' }}) }}
+                    </div>
+                </div>
+                {{ form_rest(form) }}
+                {{ form_end(form) }}
+            </div>
+            <div class="span4 well">
+                <a href="{{ path('equipe_adresse') }}" class="btn btn-primary btn-block">
+                    Retour à la liste
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+        <!-- API Google Map autocompile adresse-->
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Create the autocomplete object and associate it with the UI input control.
+                // Restrict the search to the default country, and to place type "cities".
+                autocomplete = new google.maps.places.Autocomplete(
+                        /** @type {!HTMLInputElement} */ (
+                                document.getElementById('autocomplete')), {
+                            types: ['(cities)'],
+                            componentRestrictions: countryRestrict
+                        });
+                places = new google.maps.places.PlacesService(map);
+
+                autocomplete.addListener('place_changed', onPlaceChanged);
+
+            });
+        </script>
+    {% endblock %}
